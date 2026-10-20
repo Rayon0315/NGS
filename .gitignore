@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.vscode/
+.idea/
+runs/*
+!runs/.gitkeep
+datasets/EORSSD/*/*
+!datasets/EORSSD/*/.gitkeep
+datasets/ORSSD/*/*
+!datasets/ORSSD/*/.gitkeep
+pretrained/smt/*.pth

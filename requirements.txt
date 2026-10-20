@@ -1,0 +1,10 @@
+# NGS uses the same core runtime as MLab.
+# CUDA 12.8 example:
+# pip install torch==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cu128
+
+torch==2.8.0
+torchvision==0.23.0
+numpy>=1.26.0,<2.3.5
+Pillow>=10.0.0,<13.0.0
+pysodmetrics==1.6.2
+tqdm>=4.66.0,<5.0.0
