@@ -16,9 +16,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--model",
-        choices=("pafr", "pafr_ecm"),
+        choices=("pafr", "pafr_ecm", "pafr_ecm_deep", "pafr_ecm_full"),
         default="pafr_ecm",
-        help="pafr: ECM ablation; pafr_ecm: NGS structure branch enabled.",
+        help="ECM placement: pafr=none, pafr_ecm=shallow, pafr_ecm_deep=deep, pafr_ecm_full=four-scale.",
     )
     parser.add_argument("--train-images", default="datasets/EORSSD/train-images")
     parser.add_argument(

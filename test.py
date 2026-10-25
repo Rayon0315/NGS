@@ -34,7 +34,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Evaluate an NGS checkpoint.")
     parser.add_argument(
         "--model",
-        choices=("auto", "pafr", "pafr_ecm"),
+        choices=("auto", "pafr", "pafr_ecm", "pafr_ecm_deep", "pafr_ecm_full"),
         default="auto",
         help="auto reads the model variant from checkpoint['args']['model'].",
     )
@@ -71,6 +71,10 @@ def build_model(model_name: str):
         from models.networks.smt_t_pafr_shallow_ecm_sod import (
             build_model as builder,
         )
+    elif model_name == "pafr_ecm_deep":
+        from models.networks.smt_t_pafr_deep_ecm_sod import build_model as builder
+    elif model_name == "pafr_ecm_full":
+        from models.networks.smt_t_pafr_full_ecm_sod import build_model as builder
     else:
         raise ValueError(f"Unsupported model variant: {model_name}")
     return builder()

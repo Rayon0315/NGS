@@ -24,6 +24,8 @@ from losses.pafr_region_consistency_loss import PAFRRegionConsistencyLoss
 MODEL_BUILDERS = {
     "pafr": "models.networks.smt_t_pafr_sod",
     "pafr_ecm": "models.networks.smt_t_pafr_shallow_ecm_sod",
+    "pafr_ecm_deep": "models.networks.smt_t_pafr_deep_ecm_sod",
+    "pafr_ecm_full": "models.networks.smt_t_pafr_full_ecm_sod",
 }
 
 
@@ -36,10 +38,14 @@ def build_model(model_name: str):
 
     if model_name == "pafr":
         from models.networks.smt_t_pafr_sod import build_model as builder
-    else:
+    elif model_name == "pafr_ecm":
         from models.networks.smt_t_pafr_shallow_ecm_sod import (
             build_model as builder,
         )
+    elif model_name == "pafr_ecm_deep":
+        from models.networks.smt_t_pafr_deep_ecm_sod import build_model as builder
+    else:
+        from models.networks.smt_t_pafr_full_ecm_sod import build_model as builder
 
     return builder()
 
@@ -127,6 +133,8 @@ def snapshot_sources(dst: Path, nam: bool) -> None:
         "models/backbones/smt.py",
         "models/networks/smt_t_pafr_sod.py",
         "models/networks/smt_t_pafr_shallow_ecm_sod.py",
+        "models/networks/smt_t_pafr_deep_ecm_sod.py",
+        "models/networks/smt_t_pafr_full_ecm_sod.py",
         "losses/pafr_loss.py",
         "losses/pafr_gated_crf.py",
         "losses/pafr_ssim.py",
@@ -173,7 +181,7 @@ def run_training(args, nam: bool) -> None:
     logger.info(
         "NGS | model: %s | ECM: %s | NAM loss: %s",
         args.model,
-        args.model == "pafr_ecm",
+        args.model.startswith("pafr_ecm"),
         nam,
     )
     logger.info(
